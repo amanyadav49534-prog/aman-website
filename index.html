@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AY Ultra Web Studio</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI;
+scroll-behavior:smooth;
+}
+
+body{
+background:#0f172a;
+color:white;
+transition:0.4s;
+}
+
+/* DARK MODE */
+
+.dark{
+background:white;
+color:black;
+}
+
+/* NAVBAR */
+
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 8%;
+background:rgba(0,0,0,0.6);
+backdrop-filter:blur(10px);
+position:sticky;
+top:0;
+}
+
+nav a{
+margin:15px;
+text-decoration:none;
+color:white;
+font-size:18px;
+}
+
+button{
+cursor:pointer;
+}
+
+/* HERO */
+
+.hero{
+height:90vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.7)),
+url("https://images.unsplash.com/photo-1498050108023-c5249f4df085") center/cover;
+}
+
+.hero h1{
+font-size:60px;
+}
+
+.hero span{
+color:#00e0ff;
+}
+
+.hero p{
+font-size:22px;
+margin-top:10px;
+}
+
+.hero button{
+margin-top:25px;
+padding:12px 30px;
+background:#00e0ff;
+border:none;
+border-radius:6px;
+font-size:18px;
+}
+
+/* SECTION */
+
+.section{
+padding:80px 10%;
+text-align:center;
+}
+
+/* CARDS */
+
+.cards{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:30px;
+margin-top:40px;
+}
+
+.card{
+background:rgba(255,255,255,0.1);
+padding:20px;
+width:260px;
+border-radius:10px;
+backdrop-filter:blur(5px);
+transition:0.3s;
+}
+
+.card:hover{
+transform:scale(1.05);
+}
+
+.card img{
+width:100%;
+height:150px;
+object-fit:cover;
+border-radius:8px;
+}
+
+/* SLIDER */
+
+.slider{
+width:80%;
+margin:auto;
+overflow:hidden;
+border-radius:10px;
+}
+
+.slides{
+display:flex;
+width:300%;
+animation:slide 12s infinite;
+}
+
+.slides img{
+width:100%;
+}
+
+@keyframes slide{
+
+0%{margin-left:0}
+33%{margin-left:0}
+38%{margin-left:-100%}
+66%{margin-left:-100%}
+71%{margin-left:-200%}
+100%{margin-left:-200%}
+
+}
+
+/* CONTACT */
+
+input,textarea{
+width:300px;
+padding:12px;
+margin:10px;
+border:none;
+border-radius:5px;
+}
+
+footer{
+text-align:center;
+padding:20px;
+background:black;
+margin-top:40px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h2>AY Ultra Web</h2>
+
+<nav>
+<a href="#">Home</a>
+<a href="#tech">Tech</a>
+<a href="#projects">Projects</a>
+<a href="#contact">Contact</a>
+</nav>
+
+<button onclick="darkMode()">🌙</button>
+
+</header>
+
+<section class="hero">
+
+<h1>I Build <span id="typing"></span></h1>
+
+<p>Professional Web Development</p>
+
+<button onclick="scrollDown()">Explore</button>
+
+</section>
+
+
+<section class="section" id="tech">
+
+<h2>Technologies</h2>
+
+<div class="cards">
+
+<div class="card">
+<img src="https://cdn-icons-png.flaticon.com/512/732/732212.png">
+<h3>HTML</h3>
+<p>Structure of every website</p>
+</div>
+
+<div class="card">
+<img src="https://cdn-icons-png.flaticon.com/512/732/732190.png">
+<h3>CSS</h3>
+<p>Design and styling</p>
+</div>
+
+<div class="card">
+<img src="https://cdn-icons-png.flaticon.com/512/5968/5968292.png">
+<h3>JavaScript</h3>
+<p>Dynamic functionality</p>
+</div>
+
+</div>
+
+</section>
+
+
+<section class="section" id="projects">
+
+<h2>Projects</h2>
+
+<div class="slider">
+
+<div class="slides">
+
+<img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c">
+
+<img src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f">
+
+<img src="https://images.unsplash.com/photo-1492724441997-5dc865305da7">
+
+</div>
+
+</div>
+
+</section>
+
+
+<section class="section" id="contact">
+
+<h2>Contact</h2>
+
+<input type="text" placeholder="Name"><br>
+
+<input type="email" placeholder="Email"><br>
+
+<textarea placeholder="Message"></textarea><br>
+
+<button>Send</button>
+
+</section>
+
+
+<footer>
+
+<p>© 2026 AY Ultra Web Studio</p>
+<p>Created by Aman Yadav</p>
+
+</footer>
+
+
+<script>
+
+/* DARK MODE */
+
+function darkMode(){
+document.body.classList.toggle("dark")
+}
+
+/* SCROLL */
+
+function scrollDown(){
+document.getElementById("tech").scrollIntoView({behavior:"smooth"})
+}
+
+/* TYPING EFFECT */
+
+const words=["Websites","Web Apps","Modern UI"];
+let i=0;
+let j=0;
+let current="";
+let isDeleting=false;
+
+function type(){
+
+current=words[i];
+
+if(isDeleting){
+j--;
+}else{
+j++;
+}
+
+document.getElementById("typing").textContent=current.substring(0,j);
+
+if(!isDeleting && j==current.length){
+isDeleting=true;
+setTimeout(type,1000);
+return;
+}
+
+if(isDeleting && j==0){
+isDeleting=false;
+i++;
+
+if(i==words.length){
+i=0;
+}
+}
+
+setTimeout(type,120);
+
+}
+
+type();
+
+</script>
+
+</body>
+</html>
