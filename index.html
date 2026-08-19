@@ -1,337 +1,304 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AY Ultra Web Studio</title>
-
-<style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Segoe UI;
-scroll-behavior:smooth;
-}
-
-body{
-background:#0f172a;
-color:white;
-transition:0.4s;
-}
-
-/* DARK MODE */
-
-.dark{
-background:white;
-color:black;
-}
-
-/* NAVBAR */
-
-header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:20px 8%;
-background:rgba(0,0,0,0.6);
-backdrop-filter:blur(10px);
-position:sticky;
-top:0;
-}
-
-nav a{
-margin:15px;
-text-decoration:none;
-color:white;
-font-size:18px;
-}
-
-button{
-cursor:pointer;
-}
-
-/* HERO */
-
-.hero{
-height:90vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.7)),
-url("https://images.unsplash.com/photo-1498050108023-c5249f4df085") center/cover;
-}
-
-.hero h1{
-font-size:60px;
-}
-
-.hero span{
-color:#00e0ff;
-}
-
-.hero p{
-font-size:22px;
-margin-top:10px;
-}
-
-.hero button{
-margin-top:25px;
-padding:12px 30px;
-background:#00e0ff;
-border:none;
-border-radius:6px;
-font-size:18px;
-}
-
-/* SECTION */
-
-.section{
-padding:80px 10%;
-text-align:center;
-}
-
-/* CARDS */
-
-.cards{
-display:flex;
-justify-content:center;
-flex-wrap:wrap;
-gap:30px;
-margin-top:40px;
-}
-
-.card{
-background:rgba(255,255,255,0.1);
-padding:20px;
-width:260px;
-border-radius:10px;
-backdrop-filter:blur(5px);
-transition:0.3s;
-}
-
-.card:hover{
-transform:scale(1.05);
-}
-
-.card img{
-width:100%;
-height:150px;
-object-fit:cover;
-border-radius:8px;
-}
-
-/* SLIDER */
-
-.slider{
-width:80%;
-margin:auto;
-overflow:hidden;
-border-radius:10px;
-}
-
-.slides{
-display:flex;
-width:300%;
-animation:slide 12s infinite;
-}
-
-.slides img{
-width:100%;
-}
-
-@keyframes slide{
-
-0%{margin-left:0}
-33%{margin-left:0}
-38%{margin-left:-100%}
-66%{margin-left:-100%}
-71%{margin-left:-200%}
-100%{margin-left:-200%}
-
-}
-
-/* CONTACT */
-
-input,textarea{
-width:300px;
-padding:12px;
-margin:10px;
-border:none;
-border-radius:5px;
-}
-
-footer{
-text-align:center;
-padding:20px;
-background:black;
-margin-top:40px;
-}
-
-</style>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CampusAI — Your Smart Campus Assistant</title>
+  <meta name="description" content="AI-powered campus assistant for classrooms, faculty, events, clubs, notices and resources." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f7f8fc;
+      --surface: rgba(255,255,255,.84);
+      --card: #ffffff;
+      --text: #101828;
+      --muted: #667085;
+      --line: #e6e8ef;
+      --primary: #5b5ef7;
+      --primary-2: #7c3aed;
+      --accent: #06b6d4;
+      --success: #12b76a;
+      --warning: #f79009;
+      --danger: #f04438;
+      --shadow: 0 16px 50px rgba(16,24,40,.08);
+      --radius: 22px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin:0; font-family:Inter,system-ui,sans-serif; color:var(--text); background: radial-gradient(circle at 5% 0%, rgba(124,58,237,.08), transparent 26%), radial-gradient(circle at 95% 10%, rgba(6,182,212,.08), transparent 25%), var(--bg); }
+    a { color:inherit; text-decoration:none; }
+    button,input,select { font:inherit; }
+    .container { width:min(1180px, calc(100% - 36px)); margin:auto; }
+    .topbar { position:sticky; top:0; z-index:20; backdrop-filter:blur(18px); background:rgba(247,248,252,.72); border-bottom:1px solid rgba(230,232,239,.75); }
+    .nav { height:76px; display:flex; align-items:center; justify-content:space-between; gap:20px; }
+    .brand { display:flex; align-items:center; gap:11px; font-weight:800; font-family:'Space Grotesk',sans-serif; }
+    .brand-mark { width:40px; height:40px; border-radius:13px; display:grid; place-items:center; color:white; background:linear-gradient(135deg,var(--primary),var(--primary-2)); box-shadow:0 10px 25px rgba(91,94,247,.28); }
+    .navlinks { display:flex; align-items:center; gap:22px; color:#475467; font-weight:600; font-size:14px; }
+    .navlinks a:hover { color:var(--text); }
+    .nav-actions { display:flex; align-items:center; gap:10px; }
+    .icon-btn,.avatar { border:1px solid var(--line); background:#fff; width:42px; height:42px; border-radius:13px; display:grid; place-items:center; cursor:pointer; }
+    .avatar { background:linear-gradient(135deg,#111827,#334155); color:white; font-size:13px; font-weight:800; }
+    .hero { padding:74px 0 54px; }
+    .hero-grid { display:grid; grid-template-columns:1.08fr .92fr; align-items:center; gap:52px; }
+    .eyebrow { display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; background:#eef2ff; color:#4f46e5; font-size:13px; font-weight:700; }
+    .dot { width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 4px rgba(34,197,94,.12); }
+    h1 { font-family:'Space Grotesk',sans-serif; font-size:clamp(42px, 6vw, 72px); line-height:.98; letter-spacing:-.045em; margin:18px 0; }
+    .gradient-text { background:linear-gradient(100deg,var(--primary),var(--primary-2),#0891b2); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    .hero p { font-size:18px; line-height:1.75; color:var(--muted); max-width:620px; }
+    .search-wrap { margin-top:28px; display:flex; align-items:center; gap:10px; padding:10px; background:white; border:1px solid var(--line); border-radius:18px; box-shadow:var(--shadow); max-width:650px; }
+    .search-wrap input { flex:1; border:0; outline:0; padding:10px 8px; font-size:15px; background:transparent; }
+    .search-btn,.primary-btn { border:0; cursor:pointer; color:white; padding:13px 17px; border-radius:13px; font-weight:700; background:linear-gradient(135deg,var(--primary),var(--primary-2)); box-shadow:0 10px 22px rgba(91,94,247,.24); }
+    .quick { display:flex; flex-wrap:wrap; gap:8px; margin-top:15px; }
+    .chip { border:1px solid var(--line); background:white; border-radius:999px; padding:8px 11px; font-size:12px; color:#475467; cursor:pointer; }
+    .chip:hover { border-color:#c7c9d6; }
+    .hero-card { background:linear-gradient(150deg,#111827,#1e293b); border-radius:30px; padding:22px; color:white; box-shadow:0 24px 70px rgba(15,23,42,.25); position:relative; overflow:hidden; }
+    .hero-card:before { content:''; position:absolute; inset:-20% -10%; background:radial-gradient(circle at 70% 25%, rgba(124,58,237,.42), transparent 33%),radial-gradient(circle at 30% 80%, rgba(6,182,212,.24), transparent 35%); }
+    .hero-card > * { position:relative; z-index:1; }
+    .chat-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; }
+    .ai-badge { display:flex; gap:9px; align-items:center; font-weight:800; }
+    .mini-orb { width:30px;height:30px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(135deg,#8b5cf6,#22d3ee); }
+    .online { font-size:11px; color:#a7f3d0; background:rgba(16,185,129,.11); padding:6px 9px;border-radius:999px; }
+    .chat { background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); border-radius:20px; padding:16px; }
+    .msg { max-width:82%; padding:12px 14px; border-radius:16px; margin-bottom:11px; font-size:13px; line-height:1.5; }
+    .msg.ai { background:rgba(255,255,255,.1); border-top-left-radius:7px; }
+    .msg.user { margin-left:auto; background:linear-gradient(135deg,#6366f1,#7c3aed); border-top-right-radius:7px; }
+    .mini-input { display:flex; gap:8px; padding-top:5px; }
+    .mini-input input { min-width:0; flex:1; border:0; border-radius:13px; padding:11px; outline:0; }
+    .section { padding:64px 0; }
+    .section-head { display:flex; justify-content:space-between; align-items:end; margin-bottom:24px; gap:18px; }
+    .section-head h2 { font:700 32px/1.1 'Space Grotesk',sans-serif; margin:0 0 8px; letter-spacing:-.03em; }
+    .section-head p { margin:0; color:var(--muted); }
+    .grid-4 { display:grid; grid-template-columns:repeat(4,1fr); gap:15px; }
+    .feature { padding:20px; background:var(--surface); backdrop-filter:blur(12px); border:1px solid var(--line); border-radius:20px; box-shadow:0 8px 25px rgba(16,24,40,.04); transition:.22s ease; }
+    .feature:hover { transform:translateY(-4px); box-shadow:var(--shadow); }
+    .feature-icon { width:42px;height:42px;border-radius:13px;display:grid;place-items:center;background:#eef2ff;color:#4f46e5;margin-bottom:14px;font-size:20px; }
+    .feature h3 { margin:0 0 6px;font-size:16px; }
+    .feature p { margin:0;color:var(--muted);font-size:13px;line-height:1.5; }
+    .dashboard-grid { display:grid; grid-template-columns:1.25fr .75fr; gap:18px; }
+    .panel { background:white; border:1px solid var(--line); border-radius:22px; padding:21px; box-shadow:0 10px 35px rgba(16,24,40,.045); }
+    .panel-title { display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; }
+    .panel-title h3 { margin:0; font-size:17px; }
+    .link { color:#4f46e5;font-size:13px;font-weight:700;cursor:pointer; }
+    .notice { display:flex; gap:13px; padding:14px 0; border-bottom:1px solid #eef0f4; }
+    .notice:last-child { border-bottom:0;padding-bottom:0; }
+    .datebox { min-width:45px; height:48px; border-radius:13px; display:flex; flex-direction:column; align-items:center; justify-content:center; background:#f8f8ff; color:#4f46e5; font-weight:800; }
+    .datebox span { font-size:10px;color:#98a2b3; }
+    .notice strong { display:block;font-size:13px;margin-bottom:4px; }
+    .notice p { margin:0;font-size:12px;color:var(--muted);line-height:1.45; }
+    .event { padding:13px; border:1px solid var(--line); border-radius:16px; margin-bottom:10px; background:#fbfbfd; }
+    .event .row { display:flex; justify-content:space-between; gap:8px; }
+    .event-title { font-weight:700;font-size:13px; }
+    .tag { font-size:10px; padding:5px 7px; border-radius:999px; background:#ecfdf3;color:#027a48;font-weight:800; }
+    .event-meta { color:var(--muted);font-size:11px;margin-top:7px; }
+    .category-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:15px; }
+    .resource { display:flex; align-items:center; gap:13px; padding:16px; border-radius:17px; background:white;border:1px solid var(--line);cursor:pointer; }
+    .resource:hover { border-color:#c7c9d6; }
+    .resource-icon { width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:#f2f4f7; }
+    .resource strong { font-size:13px;display:block; }
+    .resource span { font-size:11px;color:var(--muted); }
+    .cta { padding:26px; border-radius:25px; background:linear-gradient(130deg,#111827,#312e81); color:white; display:flex; justify-content:space-between; align-items:center; gap:18px; overflow:hidden; }
+    .cta h3 { font:700 27px 'Space Grotesk',sans-serif;margin:0 0 8px; }
+    .cta p { color:#cbd5e1;margin:0;max-width:700px;line-height:1.55;font-size:13px; }
+    .footer { padding:34px 0 50px; color:#98a2b3;font-size:12px; }
+    .footer-line { height:1px;background:var(--line);margin-bottom:20px; }
+    .modal { position:fixed;inset:0;background:rgba(15,23,42,.5);display:none;align-items:center;justify-content:center;padding:18px;z-index:50;backdrop-filter:blur(5px); }
+    .modal.show { display:flex; }
+    .modal-box { width:min(720px,100%);background:white;border-radius:24px;padding:22px;box-shadow:0 30px 80px rgba(15,23,42,.25);max-height:85vh;overflow:auto; }
+    .modal-head { display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px; }
+    .modal-head h3 { margin:0;font:700 23px 'Space Grotesk',sans-serif; }
+    .close { border:0;background:#f2f4f7;width:38px;height:38px;border-radius:11px;cursor:pointer; }
+    .results { display:grid;gap:10px;margin-top:12px; }
+    .result { padding:14px;border:1px solid var(--line);border-radius:15px; }
+    .result strong { font-size:14px;display:block;margin-bottom:4px; }
+    .result span { font-size:12px;color:var(--muted); }
+    .toast { position:fixed;right:20px;bottom:20px;background:#101828;color:white;padding:12px 15px;border-radius:12px;display:none;z-index:80;font-size:13px;box-shadow:var(--shadow); }
+    @media (max-width:900px){
+      .navlinks { display:none; }
+      .hero-grid,.dashboard-grid { grid-template-columns:1fr; }
+      .grid-4 { grid-template-columns:repeat(2,1fr); }
+      .category-grid { grid-template-columns:1fr 1fr; }
+    }
+    @media (max-width:600px){
+      .container { width:min(100% - 24px,1180px); }
+      .hero { padding-top:44px; }
+      .grid-4,.category-grid { grid-template-columns:1fr; }
+      .hero-card { border-radius:23px; }
+      .section { padding:45px 0; }
+      .cta { flex-direction:column;align-items:flex-start; }
+      .search-wrap { align-items:stretch;flex-direction:column; }
+    }
+  </style>
 </head>
-
 <body>
+  <header class="topbar">
+    <div class="container nav">
+      <a class="brand" href="#top"><span class="brand-mark">✦</span><span>CampusAI</span></a>
+      <nav class="navlinks">
+        <a href="#discover">Discover</a><a href="#notices">Notices</a><a href="#events">Events</a><a href="#resources">Resources</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="icon-btn" id="themeBtn" title="Toggle theme">☼</button>
+        <div class="avatar">AY</div>
+      </div>
+    </div>
+  </header>
 
-<header>
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow"><span class="dot"></span> AI-powered campus companion</div>
+          <h1>Your campus,<br><span class="gradient-text">one smart search away.</span></h1>
+          <p>Find classrooms, faculty, events, clubs, notices and study resources in seconds. Ask CampusAI naturally and get the information you need without jumping between portals.</p>
+          <div class="search-wrap">
+            <span style="font-size:18px">⌕</span>
+            <input id="mainSearch" placeholder="Ask anything… e.g. Where is Lab 204?" />
+            <button class="search-btn" id="askBtn">Ask CampusAI</button>
+          </div>
+          <div class="quick">
+            <button class="chip" data-q="Where is Electronics Lab 204?">📍 Find a classroom</button>
+            <button class="chip" data-q="Show upcoming events">📅 Upcoming events</button>
+            <button class="chip" data-q="Who teaches Java?">👨‍🏫 Find faculty</button>
+            <button class="chip" data-q="What notices are new?">🔔 New notices</button>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div class="chat-top"><div class="ai-badge"><span class="mini-orb">✦</span> CampusAI</div><span class="online">● Online</span></div>
+          <div class="chat" id="heroChat">
+            <div class="msg ai">Hi! I can help you find classrooms, faculty, events, notices and resources across campus.</div>
+            <div class="msg user">Where is the Robotics Lab?</div>
+            <div class="msg ai">Robotics Lab <b>R-204</b> is on the 2nd floor of the Engineering Block. It is next to the Embedded Systems Lab.</div>
+            <div class="mini-input"><input id="heroInput" placeholder="Type your campus question…"><button class="search-btn" id="heroAsk">↗</button></div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<h2>AY Ultra Web</h2>
+    <section class="section" id="discover">
+      <div class="container">
+        <div class="section-head"><div><h2>Everything students need</h2><p>Centralized campus information, organized around the student.</p></div></div>
+        <div class="grid-4">
+          <div class="feature" onclick="openModal('Classroom Finder')"><div class="feature-icon">⌖</div><h3>Classroom Finder</h3><p>Search buildings, labs, rooms, floors and directions.</p></div>
+          <div class="feature" onclick="openModal('Faculty Directory')"><div class="feature-icon">♟</div><h3>Faculty Directory</h3><p>Find faculty profiles, departments, office hours and subjects.</p></div>
+          <div class="feature" onclick="openModal('Campus Events')"><div class="feature-icon">◷</div><h3>Campus Events</h3><p>Discover workshops, fests, seminars, competitions and talks.</p></div>
+          <div class="feature" onclick="openModal('Clubs & Communities')"><div class="feature-icon">◎</div><h3>Clubs & Communities</h3><p>Explore student clubs, activities and how to join them.</p></div>
+        </div>
+      </div>
+    </section>
 
-<nav>
-<a href="#">Home</a>
-<a href="#tech">Tech</a>
-<a href="#projects">Projects</a>
-<a href="#contact">Contact</a>
-</nav>
+    <section class="section" id="notices">
+      <div class="container dashboard-grid">
+        <div class="panel">
+          <div class="panel-title"><h3>Latest campus notices</h3><span class="link" onclick="showToast('All notices opened')">View all →</span></div>
+          <div class="notice"><div class="datebox">19<span>AUG</span></div><div><strong>Mid-semester timetable published</strong><p>Check your department schedule and classroom allocation for next week.</p></div></div>
+          <div class="notice"><div class="datebox">18<span>AUG</span></div><div><strong>Library hours extended</strong><p>Central library will remain open until 9:00 PM during assessment week.</p></div></div>
+          <div class="notice"><div class="datebox">17<span>AUG</span></div><div><strong>Innovation challenge registrations</strong><p>Teams of 2–4 can register for the annual campus innovation challenge.</p></div></div>
+          <div class="notice"><div class="datebox">16<span>AUG</span></div><div><strong>Bus route update</strong><p>Route B-3 timing has changed from 7:40 AM to 7:50 AM effective Monday.</p></div></div>
+        </div>
+        <div class="panel" id="events">
+          <div class="panel-title"><h3>Coming up</h3><span class="link" onclick="openModal('Events')">Calendar →</span></div>
+          <div class="event"><div class="row"><div class="event-title">AI & Robotics Workshop</div><span class="tag">Today</span></div><div class="event-meta">4:00 PM · Innovation Hall</div></div>
+          <div class="event"><div class="row"><div class="event-title">Photography Club Meetup</div><span class="tag">Tomorrow</span></div><div class="event-meta">2:30 PM · Student Activity Center</div></div>
+          <div class="event"><div class="row"><div class="event-title">Coding Contest</div><span class="tag">Aug 24</span></div><div class="event-meta">10:00 AM · Computer Centre</div></div>
+          <div class="event"><div class="row"><div class="event-title">Career Talk: Industry 4.0</div><span class="tag">Aug 26</span></div><div class="event-meta">11:30 AM · Seminar Hall</div></div>
+        </div>
+      </div>
+    </section>
 
-<button onclick="darkMode()">🌙</button>
+    <section class="section" id="resources">
+      <div class="container">
+        <div class="section-head"><div><h2>Student resource hub</h2><p>Frequently used services, documents and campus tools in one place.</p></div></div>
+        <div class="category-grid">
+          <div class="resource" onclick="showToast('Opening timetable…')"><div class="resource-icon">🗓</div><div><strong>Timetable</strong><span>Classes & room allocations</span></div></div>
+          <div class="resource" onclick="showToast('Opening academic calendar…')"><div class="resource-icon">📘</div><div><strong>Academic Calendar</strong><span>Semesters, exams & holidays</span></div></div>
+          <div class="resource" onclick="showToast('Opening library resources…')"><div class="resource-icon">📚</div><div><strong>Library</strong><span>Books, databases & e-resources</span></div></div>
+          <div class="resource" onclick="showToast('Opening student portal…')"><div class="resource-icon">🎓</div><div><strong>Student Portal</strong><span>Results, attendance & profile</span></div></div>
+          <div class="resource" onclick="showToast('Opening transport routes…')"><div class="resource-icon">🚌</div><div><strong>Transport</strong><span>Bus routes & timings</span></div></div>
+          <div class="resource" onclick="showToast('Opening support centre…')"><div class="resource-icon">🛟</div><div><strong>Support Centre</strong><span>IT, admin & student help</span></div></div>
+        </div>
+      </div>
+    </section>
 
-</header>
+    <section class="section">
+      <div class="container">
+        <div class="cta"><div><h3>Stop searching. Start asking.</h3><p>CampusAI turns scattered campus information into a conversational experience students can use from one dashboard.</p></div><button class="primary-btn" onclick="document.getElementById('mainSearch').focus();window.scrollTo({top:0,behavior:'smooth'})">Ask a question →</button></div>
+      </div>
+    </section>
+  </main>
 
-<section class="hero">
+  <footer class="footer"><div class="container"><div class="footer-line"></div><div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap"><span>© 2026 CampusAI · Smart Campus Assistant</span><span>Demo frontend · Connect to your campus APIs/backend for live data</span></div></div></footer>
 
-<h1>I Build <span id="typing"></span></h1>
+  <div class="modal" id="modal"><div class="modal-box"><div class="modal-head"><h3 id="modalTitle">CampusAI</h3><button class="close" onclick="closeModal()">✕</button></div><div id="modalBody"></div></div></div>
+  <div class="toast" id="toast"></div>
 
-<p>Professional Web Development</p>
+  <script>
+    const API_BASE = '/api';
+    const demoKnowledge = [
+      {key:'classroom', title:'Electronics Lab 204', text:'Engineering Block · 2nd floor · Room E-204'},
+      {key:'classroom', title:'Robotics Lab R-204', text:'Engineering Block · 2nd floor · next to Embedded Systems Lab'},
+      {key:'faculty', title:'Dr. Neha Sharma', text:'Electronics & Computer Science · Java, OOP, Software Engineering'},
+      {key:'faculty', title:'Prof. Rahul Mehta', text:'Electronics · PLC, Industrial Automation, Embedded Systems'},
+      {key:'event', title:'AI & Robotics Workshop', text:'Today · 4:00 PM · Innovation Hall'},
+      {key:'event', title:'Coding Contest', text:'August 24 · 10:00 AM · Computer Centre'},
+      {key:'notice', title:'Mid-semester timetable published', text:'Check your department schedule and room allocation.'},
+      {key:'resource', title:'Central Library', text:'Books, databases and e-resources · open until 9:00 PM this week.'},
+      {key:'club', title:'Robotics Club', text:'Build robots, attend workshops and join project teams.'},
+      {key:'club', title:'Coding Club', text:'Competitive programming, web development and hackathons.'}
+    ];
 
-<button onclick="scrollDown()">Explore</button>
+    async function api(path, options={}) {
+      const r = await fetch(API_BASE + path, {headers:{'Content-Type':'application/json'}, ...options});
+      if (!r.ok) throw new Error('API error ' + r.status);
+      return r.json();
+    }
 
-</section>
+    async function askBackend(question){
+      try {
+        const data = await api('/ask', {method:'POST', body:JSON.stringify({question})});
+        return data;
+      } catch (e) {
+        return {answer:'Backend is not reachable. Start the Node.js server with `npm install` then `npm start`.', source:'offline', results:demoKnowledge.filter(x => JSON.stringify(x).toLowerCase().includes(question.toLowerCase())).slice(0,4)};
+      }
+    }
 
+    async function openSearch(q){
+      const modal=document.getElementById('modal');
+      document.getElementById('modalTitle').textContent='CampusAI answer';
+      document.getElementById('modalBody').innerHTML='<p style="color:#667085">Thinking…</p>';
+      modal.classList.add('show');
+      const data = await askBackend(q);
+      const results=(data.results||[]).slice(0,6).map(x=>{
+        const title=x.title||x.name||x.email||x.id||'Campus result';
+        const desc=x.text||x.body||x.description||([x.building && `Building: ${x.building}`, x.floor !== undefined && `Floor: ${x.floor}`, x.venue && `Venue: ${x.venue}`, x.office && `Office: ${x.office}`].filter(Boolean).join(' · '));
+        return `<div class="result"><strong>${title}</strong><span>${desc||''}</span></div>`;
+      }).join('');
+      document.getElementById('modalBody').innerHTML=`<div class="result"><strong>✦ ${data.source==='openai'?'AI answer':'Campus answer'}</strong><span>${data.answer}</span></div>${results?`<div class="results">${results}</div>`:''}`;
+    }
 
-<section class="section" id="tech">
-
-<h2>Technologies</h2>
-
-<div class="cards">
-
-<div class="card">
-<img src="https://cdn-icons-png.flaticon.com/512/732/732212.png">
-<h3>HTML</h3>
-<p>Structure of every website</p>
-</div>
-
-<div class="card">
-<img src="https://cdn-icons-png.flaticon.com/512/732/732190.png">
-<h3>CSS</h3>
-<p>Design and styling</p>
-</div>
-
-<div class="card">
-<img src="https://cdn-icons-png.flaticon.com/512/5968/5968292.png">
-<h3>JavaScript</h3>
-<p>Dynamic functionality</p>
-</div>
-
-</div>
-
-</section>
-
-
-<section class="section" id="projects">
-
-<h2>Projects</h2>
-
-<div class="slider">
-
-<div class="slides">
-
-<img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c">
-
-<img src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f">
-
-<img src="https://images.unsplash.com/photo-1492724441997-5dc865305da7">
-
-</div>
-
-</div>
-
-</section>
-
-
-<section class="section" id="contact">
-
-<h2>Contact</h2>
-
-<input type="text" placeholder="Name"><br>
-
-<input type="email" placeholder="Email"><br>
-
-<textarea placeholder="Message"></textarea><br>
-
-<button>Send</button>
-
-</section>
-
-
-<footer>
-
-<p>© 2026 AY Ultra Web Studio</p>
-<p>Created by Aman Yadav</p>
-
-</footer>
-
-
-<script>
-
-/* DARK MODE */
-
-function darkMode(){
-document.body.classList.toggle("dark")
-}
-
-/* SCROLL */
-
-function scrollDown(){
-document.getElementById("tech").scrollIntoView({behavior:"smooth"})
-}
-
-/* TYPING EFFECT */
-
-const words=["Websites","Web Apps","Modern UI"];
-let i=0;
-let j=0;
-let current="";
-let isDeleting=false;
-
-function type(){
-
-current=words[i];
-
-if(isDeleting){
-j--;
-}else{
-j++;
-}
-
-document.getElementById("typing").textContent=current.substring(0,j);
-
-if(!isDeleting && j==current.length){
-isDeleting=true;
-setTimeout(type,1000);
-return;
-}
-
-if(isDeleting && j==0){
-isDeleting=false;
-i++;
-
-if(i==words.length){
-i=0;
-}
-}
-
-setTimeout(type,120);
-
-}
-
-type();
-
-</script>
-
+    async function openModal(name){
+      document.getElementById('modalTitle').textContent=name;
+      document.getElementById('modalBody').innerHTML='<p style="color:#667085">Loading live campus data…</p>';
+      document.getElementById('modal').classList.add('show');
+      const route = name==='Classroom Finder'?'/rooms':name==='Faculty Directory'?'/faculty':name==='Clubs & Communities'?'/clubs':'/events';
+      try {
+        const items=await api(route);
+        document.getElementById('modalBody').innerHTML=`<div class="results">${items.map(x=>`<div class="result"><strong>${x.name||x.title}</strong><span>${x.description||x.body||([x.department,x.office,x.venue,x.date&&x.date+' '+(x.time||'')].filter(Boolean).join(' · '))}</span></div>`).join('')}</div>`;
+      } catch(e) {
+        document.getElementById('modalBody').innerHTML='<p style="color:#667085">Could not load backend data. Please start the server.</p>';
+      }
+    }
+    function closeModal(){document.getElementById('modal').classList.remove('show');}
+    function showToast(t){const e=document.getElementById('toast');e.textContent=t;e.style.display='block';clearTimeout(window.__toast);window.__toast=setTimeout(()=>e.style.display='none',1800)}
+    async function runAsk(){const q=document.getElementById('mainSearch').value.trim(); if(!q) return showToast('Type a campus question first'); await openSearch(q)}
+    document.getElementById('askBtn').onclick=runAsk;
+    document.getElementById('mainSearch').addEventListener('keydown',e=>{if(e.key==='Enter')runAsk();});
+    document.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{document.getElementById('mainSearch').value=c.dataset.q;runAsk();});
+    document.getElementById('heroAsk').onclick=async ()=>{const q=document.getElementById('heroInput').value.trim();if(q)await openSearch(q);else showToast('Type your campus question')};
+    document.getElementById('heroInput').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('heroAsk').click();});
+    document.getElementById('modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal();});
+    document.getElementById('themeBtn').onclick=()=>{document.body.classList.toggle('dark'); if(document.body.classList.contains('dark')){document.documentElement.style.setProperty('--bg','#080b14');document.documentElement.style.setProperty('--surface','rgba(17,24,39,.84)');document.documentElement.style.setProperty('--card','#111827');document.documentElement.style.setProperty('--text','#f8fafc');document.documentElement.style.setProperty('--muted','#94a3b8');document.documentElement.style.setProperty('--line','#243044');document.querySelectorAll('.panel,.resource,.search-wrap,.chip,.icon-btn,.modal-box').forEach(e=>e.style.background='#111827');}else{location.reload();}};
+  </script>
 </body>
 </html>
